@@ -5,7 +5,7 @@ public class Board {
 	private String title;
 	private String content;
 	private String writer;
-	//private int viewCnt;
+	private int viewCnt;
 	
 	public String getTitle() {
 		return title;
@@ -25,17 +25,14 @@ public class Board {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	/*public int getViewCnt() {
+	public int getViewCnt() {
 		return viewCnt;
 	}
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	*/
-	@Override
-	public String toString() {
-		return "Board [title=" + title + ", content=" + content + "]";
-	}
+	
+	
 	public int getCnt() {
 		return cnt;
 	}
@@ -43,4 +40,8 @@ public class Board {
 		this.cnt = cnt;
 	}
 	
+	@Override
+	public String toString() {
+		return "Board [title=" + title + ", content=" + content + "]";
+	}
 }

@@ -14,7 +14,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-
+                                   <h1>게시판</h1>
 </head>
 <body>
 <div class="container">
@@ -45,7 +45,7 @@
 
       <td>${row.content}</td>
       <td>${row.writer}</td>
-       
+      <td>${row.viewCnt}</td>
     </tr>
     </c:forEach>
     

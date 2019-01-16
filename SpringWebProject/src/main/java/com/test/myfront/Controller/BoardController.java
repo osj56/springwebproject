@@ -53,6 +53,7 @@ public class BoardController {
 		
 		
 		List<Board> detail = service.detailBoardList(board,board.getCnt());
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("detail",detail);
 		mv.setViewName("/board/boardDetail");
@@ -85,6 +86,12 @@ public class BoardController {
 		System.out.println(board.getContent());
 		System.out.println(board.getCnt());
 		return mv;
+	}
+	
+	@RequestMapping(value="/boardDelete")
+	public String BoardDelete(Board board) {
+		service.boardDelete(board, board.getCnt());
+		return "redirect:/board";
 	}
 	
 }

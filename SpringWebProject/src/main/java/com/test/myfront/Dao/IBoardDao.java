@@ -15,4 +15,6 @@ public interface IBoardDao {
 	List<Board> getDetailList(Board board, int cnt);
 	int BoardModify(Board board, int cnt);
 	List<Board> ShowDefaultModifyList(Board board, int cnt);
+	int BoardDelete(Board board, int cnt);
+	int BoardViewCnt(Board board);
 }

@@ -5,10 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.test.myfront.board.Board;
-import com.test.myfront.member.Member;
 
 @Repository
 public class BoardDao implements IBoardDao {
@@ -71,7 +66,7 @@ public class BoardDao implements IBoardDao {
 		// TODO Auto-generated method stub
 		List<Board> boards = null;
 		
-		boards=template.query("SELECT title,boardcontent,writer,cnt FROM board", new RowMapper<Board>(){
+		boards=template.query("SELECT title,boardcontent,writer,cnt,viewcnt FROM board", new RowMapper<Board>(){
 
 			@Override
 			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -81,6 +76,7 @@ public class BoardDao implements IBoardDao {
 				board.setContent(rs.getString("boardcontent"));
 				board.setWriter(rs.getString("writer"));
 				board.setCnt(rs.getInt("cnt"));
+				board.setViewCnt(rs.getInt("viewcnt"));
 				return board;
 			}
 			
@@ -147,6 +143,38 @@ public class BoardDao implements IBoardDao {
 				ps.setInt(3, board.getCnt());
 			}
 			
+		});
+		return result;
+	}
+
+	@Override
+	public int BoardDelete(final Board board, int cnt) {
+		int result=0;
+		final String sql="DELETE board WHERE cnt = ?";
+		result = template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				// TODO Auto-generated method stub
+				ps.setInt(1, board.getCnt());
+			}
+			
+		});
+		// TODO Auto-generated method stub
+		return result;
+	}
+
+	@Override
+	public int BoardViewCnt(final Board board) {
+		int result=0;
+		final String sql ="UPDATE board SET viewcnt = viewcnt + 1 where cnt = ?";
+		result = template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				// TODO Auto-generated method stub
+				ps.setInt(1, board.getCnt());
+			}
 		});
 		return result;
 	}

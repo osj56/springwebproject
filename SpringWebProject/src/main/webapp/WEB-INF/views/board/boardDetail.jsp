@@ -16,6 +16,7 @@
  
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<h1>상세보기</h1>
 </head>
 <body>
  
@@ -51,8 +52,8 @@
             <td colspan="3">${row.content}</td>
         </tr>
         <div class="card-body">
-            <a href="${cp}/board/boardModify?cnt=${row.cnt}" >수정</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm " role="button">삭제</a>
+            <a href="${cp}/board/boardModify?cnt=${row.cnt}" class="btn btn-outline-secondary btn-sm " role="button">수정</a>
+            <a href="${cp}/board/boardDelete?cnt=${row.cnt}" class="btn btn-outline-secondary btn-sm " role="button">삭제</a>
         </div>
         
     </div>

@@ -32,6 +32,8 @@ public class BoardService implements IBoardService {
 	}
 	public List<Board> detailBoardList(Board board,int cnt){
 		//System.out.println(cnt);
+		dao.BoardViewCnt(board);
+		
 		return dao.getDetailList(board,cnt);
 	}
 	public List<Board> showDefaultModify(Board board,int cnt){
@@ -46,6 +48,12 @@ public class BoardService implements IBoardService {
 		System.out.println("¼·½Ã½º");
 		System.out.println(cnt);
 		return board;
+	}
+
+	@Override
+	public void boardDelete(Board board, int cnt) {
+		// TODO Auto-generated method stub
+		dao.BoardDelete(board, cnt);
 	}
 
 	

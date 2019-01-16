@@ -88,7 +88,7 @@ public class HomeController {
 		mv.addObject("list",list);
 		mv.setViewName("/board/board");
 	//	System.out.println(mem.getMemMail());
-	
+		
 		return mv;
 	}
 }
