@@ -73,12 +73,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardModifyOk")
-	public String boardModifyOk(Board board) {
+	public ModelAndView boardModifyOk(Board board) {
 		service.boardModify(board, board.getCnt());
-		System.out.println("아래는 수정값");
 	
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("modify", board);
+		mv.setViewName( "redirect:/board");
+		
+		System.out.println("아래는 수정값");
+		System.out.println(board.getTitle());
+		System.out.println(board.getContent());
 		System.out.println(board.getCnt());
-		return "redirect:/board";
+		return mv;
 	}
 	
 }

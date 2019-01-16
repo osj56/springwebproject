@@ -144,7 +144,7 @@ public class BoardDao implements IBoardDao {
 				// TODO Auto-generated method stub
 				ps.setString(1, board.getTitle());
 				ps.setString(2, board.getContent());
-				ps.setInt(3, cnt);
+				ps.setInt(3, board.getCnt());
 			}
 			
 		});

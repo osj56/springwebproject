@@ -18,63 +18,35 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-
-<form:form action="${cp}/board/boardModifyOk" >
-
+ <form:form action="${cp}/board/boardModifyOk" method="post" >
 <div class="container">
 <table class="table table-bordered">
-	
+    <thead>
+        <caption> 글쓰기 </caption>
+    </thead>
     <tbody>
-         <c:forEach items="${modify}" var="row"  >
-        <input type="hidden" name="cnt" value="${row.cnt}">
-      <table class="table">
-        <tr>
-            <th class="success">글번호</th>
-            <td>${row.cnt}</td>
-
-        </tr>
-           
-         
-        <tr>
-            <th class="success">작성자</th>
-            <td>${row.writer}</td>
+        
+            <tr>
+                <th>제목: </th>
+                <td><input type="text" placeholder="제목을 입력하세요. " name="title"/></td>
+            </tr>
+            <tr>
+                <th>내용: </th>
+                <td><textarea cols="10" placeholder="내용을 입력하세요. " name="content"></textarea></td>
+            </tr>
             
-        </tr>
-         
-       
-         
-        <tr>
-            <th class="success">제목</th>
-           <td><input type="text" placeholder="제목을 입력하세요. " name="title"/></td>
-             
-        </tr>
-         
-        <tr>
-            <th class="success">글 내용</th>
-       <td><input cols="10" placeholder="내용을 입력하세요. " name="content"/></td>
-        </tr>
-     
-            
-         <div class="card-body">
-            <button type="submit"  >확인</button>
-         
-        </div>
-  
-
-
-
-    
-	</table>
-	
-	</c:forEach>
-
-
+            <tr>
+                <td colspan="2">
+                    <button type="submit"  class="btn btn-lg btn-success btn-block">등록</button>
+   
+                    
+                </td>
+            </tr>
      
     </tbody>
 </table>
 </div>
 </form:form>
-
 </body>
 </html>
 
