@@ -75,6 +75,19 @@ public class HomeController {
 		return "/home";
 	}
 	
+	@RequestMapping(value="/clientInfo")
+	public ModelAndView clientInfo(Member member, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memId =(String)session.getAttribute("login");
+		member.setMemId(memId);
+		ModelAndView mv = new ModelAndView();
+		List<Member> mem = service.clientInfo(member);
+		
+		mv.addObject("list", mem);
+		mv.setViewName("/board/clientInfo");
+		return mv;
+	}
+	
 	@RequestMapping(value="/board")
 	public ModelAndView board(Board board, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();

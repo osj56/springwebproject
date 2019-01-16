@@ -57,7 +57,8 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("detail",detail);
 		mv.setViewName("/board/boardDetail");
-		System.out.println(board.getCnt());
+		System.out.println("상세보기 조회수");
+		System.out.println(detail);
 		return mv;
 	}
 	

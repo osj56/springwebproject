@@ -90,7 +90,7 @@ public class BoardDao implements IBoardDao {
 		// TODO Auto-generated method stub
 	//	final Board board 
 		List<Board> boards=null;
-		boards=template.query("SELECT title,boardcontent,writer,cnt FROM board WHERE cnt = ?",new Object[] {board.getCnt()},new RowMapper<Board>() {
+		boards=template.query("SELECT title,boardcontent,writer,cnt,viewcnt FROM board WHERE cnt = ?",new Object[] {board.getCnt()},new RowMapper<Board>() {
 
 			@Override
 			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -100,6 +100,7 @@ public class BoardDao implements IBoardDao {
 				board.setContent(rs.getString("boardcontent"));
 				board.setWriter(rs.getString("writer"));
 				board.setCnt(rs.getInt("cnt"));
+				board.setViewCnt(rs.getInt("viewcnt"));
 				return board;
 			}
 			

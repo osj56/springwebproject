@@ -1,5 +1,7 @@
 package com.test.myfront.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,9 @@ public class RMemberService implements MemberService {
 		return result;
 		
 	}
-
+	
+	public List<Member> clientInfo(Member member){
+		List<Member> mem = dao.ClientInfo(member);
+		return mem;
+	}
 }

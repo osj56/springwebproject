@@ -30,7 +30,8 @@
             <th class="success">글번호</th>
              <td>${row.cnt}</td>
             <th class="success">조회수</th>
-            <td>></td>
+         	<td>${row.viewCnt}</td>
+           
         </tr>
            
          
@@ -61,7 +62,7 @@
 
 
 
-     </c:forEach>
+   
     
 
 
@@ -70,7 +71,7 @@
     </tbody>
 </table>
 </div>
-
+</c:forEach>
 </body>
 </html>
 

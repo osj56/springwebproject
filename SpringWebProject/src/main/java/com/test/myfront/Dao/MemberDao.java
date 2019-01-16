@@ -78,5 +78,29 @@ public class MemberDao implements IMemberDao {
 		if(members.isEmpty()) return null;
 		return members.get(0);
 	}
+	
+	public List<Member> ClientInfo(final Member member) {
+		// TODO Auto-generated method stub
+		List<Member> members=null;
+		final String sql="SELECT * FROM member WHERE memId = ?";
+		
+		members=template.query(sql, new Object[] {member.getMemId()},new RowMapper<Member>() {
+
+			@Override
+			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Member mem = new Member();
+				mem.setMemId(rs.getString("memId"));
+				mem.setMemPw(rs.getString("memPw"));
+				mem.setMemMail(rs.getString("memMail"));
+				return mem;
+			}
+			
+		});
+		
+		if(members.isEmpty()) return null;
+		return members;
+	}
+
 
 }
