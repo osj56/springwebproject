@@ -1,22 +1,21 @@
 package com.test.myfront.Controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
+import com.test.myfront.board.PageMaker;
 import com.test.myfront.member.Member;
 import com.test.myfront.service.BoardService;
 
@@ -64,7 +63,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardModify")
 	public ModelAndView boardModify(Board board,HttpServletRequest request) {
-		//service.boardModify(board);
+		
 		List<Board> detail = service.showDefaultModify(board,board.getCnt());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("modify",detail);
@@ -93,6 +92,23 @@ public class BoardController {
 	public String BoardDelete(Board board) {
 		service.boardDelete(board, board.getCnt());
 		return "redirect:/board";
+	}
+	
+	@RequestMapping(value="/listCri")
+	public String listCri(Criteria cri, Model model) {
+		model.addAttribute("list", service.listCriteria(cri));
+		return "board/listCri";
+	}
+	
+	@RequestMapping("listPage")
+	public String listPage(Criteria cri, Model model) {
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(131);
+		model.addAttribute("pageMaker", pageMaker);
+		return "board/listPage";
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
 import com.test.myfront.member.Member;
 
 public interface IBoardService {
@@ -14,4 +15,5 @@ public interface IBoardService {
 	List<Board> detailBoardList(Board board,int cnt);
 	Board boardModify(Board board, int cnt);
 	void boardDelete(Board board, int cnt);
+	List<Board> listCriteria(Criteria cri);
 }

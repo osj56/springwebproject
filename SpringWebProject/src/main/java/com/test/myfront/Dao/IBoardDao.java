@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
 import com.test.myfront.member.Member;
 
 public interface IBoardDao {
@@ -17,4 +18,6 @@ public interface IBoardDao {
 	List<Board> ShowDefaultModifyList(Board board, int cnt);
 	int BoardDelete(Board board, int cnt);
 	int BoardViewCnt(Board board);
+	List<Board> listPage(int page);
+	List<Board> listCriteria(Criteria cir);
 }

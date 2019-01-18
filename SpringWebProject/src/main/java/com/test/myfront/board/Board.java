@@ -39,9 +39,11 @@ public class Board {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	
 	@Override
 	public String toString() {
-		return "Board [title=" + title + ", content=" + content + "]";
+		return "Board [cnt=" + cnt + ", title=" + title + ", content=" + content + ", writer=" + writer + ", viewCnt="
+				+ viewCnt + "]";
 	}
+
+	
 }

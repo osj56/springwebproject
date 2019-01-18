@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <th>내용: </th>
-                <td><textarea cols="10" placeholder="내용을 입력하세요. " name="content"></textarea></td>
+                <td><textarea cols="30" placeholder="내용을 입력하세요. " name="content"></textarea></td>
             </tr>
             
             <tr>

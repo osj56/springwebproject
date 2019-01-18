@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.test.myfront.Dao.BoardDao;
 import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
 import com.test.myfront.member.Member;
 
 @Service
@@ -54,6 +55,12 @@ public class BoardService implements IBoardService {
 	public void boardDelete(Board board, int cnt) {
 		// TODO Auto-generated method stub
 		dao.BoardDelete(board, cnt);
+	}
+
+	@Override
+	public List<Board> listCriteria(Criteria cri) {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
 	}
 
 	

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member">
+      <select id="memberSearch" resultType="com.test.myfront.member.Member">
+      	SELECT * FROM MEMBER WHERE MEMID = #{memId} AND MEMPW = #{memPw}
+      </select>
+      
+      <insert id="memberInsert">
+      INSERT INTO MEMBER (MEMID,MEMPW, MEMMAIL) VALUES (#{memId},#{memPw},#{memMail})
+      </insert>
+      
+      <select id="ClientInfo" resultType="com.test.myfront.member.Member">
+      
+      SELECT * FROM member WHERE memId = #{memId}
+      </select>
+</mapper>

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,18 +15,22 @@ import org.springframework.stereotype.Repository;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
 
 @Repository
 public class BoardDao implements IBoardDao {
-	private String driver = "oracle.jdbc.driver.OracleDriver";
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String userid = "scott";
-	private String userpw = "tiger";
+//	private String driver = "oracle.jdbc.driver.OracleDriver";
+//	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//	private String userid = "scott";
+//	private String userpw = "tiger";
 	
-	private ComboPooledDataSource dataSource;
-	private JdbcTemplate template;
+//	private ComboPooledDataSource dataSource;
+//	private JdbcTemplate template;
 	
-	public BoardDao() {
+	@Autowired
+	private SqlSession sqlsession;
+	
+/*	public BoardDao() {
 		dataSource = new ComboPooledDataSource();
 		try {
 			dataSource.setDriverClass(driver);
@@ -37,11 +43,11 @@ public class BoardDao implements IBoardDao {
 		template = new JdbcTemplate();
 		template.setDataSource(dataSource);
 	}
-
+*/
 	@Override
 	public int BoardWrite(final Board board) {
 	
-		int result=0;
+		/*int result=0;
 	
 		final String sql="INSERT INTO board (title, boardcontent, writer, cnt) values (?,?,?,cnt.NEXTVAL)";
 	
@@ -57,14 +63,16 @@ public class BoardDao implements IBoardDao {
 			}
 			
 		});
-		return result;
+		*/
+		
+		return sqlsession.insert("board.BoardWrite", board);
 	//	System.out.println(member.getMemId());
 	}
 
 	@Override
 	public List<Board> getList(final Board board) {
 		// TODO Auto-generated method stub
-		List<Board> boards = null;
+	/*	List<Board> boards = null;
 		
 		boards=template.query("SELECT title,boardcontent,writer,cnt,viewcnt FROM board", new RowMapper<Board>(){
 
@@ -81,8 +89,12 @@ public class BoardDao implements IBoardDao {
 			}
 			
 		});
-	//	System.out.println(boards.);
-		return boards;
+	
+		//boards=sqlsession.selectList("board.getList");
+	//	System.out.println(boards);
+	 
+	 */
+		return sqlsession.selectList("board.getList");
 	}
 
 	@Override
@@ -90,7 +102,7 @@ public class BoardDao implements IBoardDao {
 		// TODO Auto-generated method stub
 	//	final Board board 
 		List<Board> boards=null;
-		boards=template.query("SELECT title,boardcontent,writer,cnt,viewcnt FROM board WHERE cnt = ?",new Object[] {board.getCnt()},new RowMapper<Board>() {
+	/*	boards=template.query("SELECT title,boardcontent,writer,cnt,viewcnt FROM board WHERE cnt = ?",new Object[] {board.getCnt()},new RowMapper<Board>() {
 
 			@Override
 			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -105,6 +117,8 @@ public class BoardDao implements IBoardDao {
 			}
 			
 		});
+		*/
+		boards = sqlsession.selectList("board.getDetailList", cnt);
 		System.out.println(boards);
 		return boards;
 	}
@@ -112,8 +126,8 @@ public class BoardDao implements IBoardDao {
 	public List<Board> ShowDefaultModifyList(final Board board ,int cnt) {
 		// TODO Auto-generated method stub
 	//	final Board board 
-		List<Board> boards=null;
-		boards=template.query("SELECT title,boardcontent,writer,cnt FROM board WHERE cnt = ?",new Object[] {board.getCnt()},new RowMapper<Board>() {
+	/*	List<Board> boards=null;
+		boards=template.query("SELECT title,content,writer,cnt FROM board WHERE cnt = ?",new Object[] {board.getCnt()},new RowMapper<Board>() {
 
 			@Override
 			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -127,13 +141,14 @@ public class BoardDao implements IBoardDao {
 			}
 			
 		});
-		System.out.println(boards);
-		return boards;
+		*/
+		//System.out.println(boards);
+		return sqlsession.selectList("board.ShowDefaultModifyList");
 	}
 	@Override
 	public int BoardModify(final Board board, int cnt) {
-		int result=0;
-		final String sql = "UPDATE board SET title = ?, boardcontent = ? WHERE cnt = ?";
+	/*	int result=0;
+		final String sql = "UPDATE board SET title = ?, content = ? WHERE cnt = ?";
 		result = template.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -145,12 +160,13 @@ public class BoardDao implements IBoardDao {
 			}
 			
 		});
-		return result;
+		*/
+		return sqlsession.update("board.BoardModify",board);
 	}
 
 	@Override
 	public int BoardDelete(final Board board, int cnt) {
-		int result=0;
+/*		int result=0;
 		final String sql="DELETE board WHERE cnt = ?";
 		result = template.update(sql, new PreparedStatementSetter() {
 
@@ -161,13 +177,14 @@ public class BoardDao implements IBoardDao {
 			}
 			
 		});
+		*/
 		// TODO Auto-generated method stub
-		return result;
+		return sqlsession.delete("board.BoardDelete", board);
 	}
 
 	@Override
 	public int BoardViewCnt(final Board board) {
-		int result=0;
+	/*	int result=0;
 		final String sql ="UPDATE board SET viewcnt = viewcnt + 1 where cnt = ?";
 		result = template.update(sql, new PreparedStatementSetter() {
 			
@@ -177,7 +194,23 @@ public class BoardDao implements IBoardDao {
 				ps.setInt(1, board.getCnt());
 			}
 		});
-		return result;
+		*/
+		return sqlsession.update("board.BoardViewCnt", board);
 	}
+	
+	@Override
+	public List<Board> listPage(int page) {
+		if(page<0) page = 1;
+		page = (page - 1) * 10;
+		return null;
+	}
+	
+	@Override
+	public List<Board> listCriteria(Criteria cir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	
 }
