@@ -30,4 +30,22 @@
       <update id="BoardViewCnt">
       	UPDATE board SET viewcnt = viewcnt + 1 where cnt = #{cnt}
       </update>
+      <select id="listPage" resultType="com.test.myfront.board.Board">
+      	SELECT title,content,writer,cnt,viewcnt FROM board where cnt > 0 LIMIT #{page},10
+      </select>
+      <select id="listCriteria" resultType="com.test.myfront.board.Board">
+      select cnt, title, content, writer,  viewCnt
+       from (
+           select cnt, title, content, writer, viewCnt,
+               row_number() over(order by cnt desc) as rNum
+           from board
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by cnt desc
+	 
+      </select>
+      
+      <select id="countPaging" resultType="int">
+      	SELECT count(cnt) from board where cnt>0
+      </select>
 </mapper>

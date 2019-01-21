@@ -63,6 +63,19 @@ public class BoardService implements IBoardService {
 		return dao.listCriteria(cri);
 	}
 
+	@Override
+	public int listCountCriteria(Criteria cri) {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+	
+	
 	
 	
 	

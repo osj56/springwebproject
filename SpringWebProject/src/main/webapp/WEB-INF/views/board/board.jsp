@@ -32,7 +32,7 @@
   <tbody>
  
    
-      <c:forEach items="${list}" var="row" varStatus="status"  >
+      <c:forEach items="${plist}" var="row" varStatus="status"  >
     <tr>
 
       <td scope="row">${row.cnt}</td>
@@ -53,14 +53,38 @@
   </tbody>
   
 </table>
-        
-        <div>            
+
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+   
+   <c:if test="${pageMaker.prev}">
+    <li class="page-item disabled">
+      <a class="page-link" href="board${pageMaker.makeQuery(pageMaker.startPage - 1)}" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+   </c:if> 
+    
+    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    <li class="page-item"><a class="page-link" href="board${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    </c:forEach>
+    
+      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+    <li class="page-item">
+      <a class="page-link" href="board${pageMaker.makeQuery(pageMaker.endPage + 1)}">Next</a>
+    </li>
+     </c:if> 
+  </ul>
+</nav>
+
             <a href='#' onClick='fn_write()' class="btn btn-success">글쓰기</a>   
             <a class="btn btn-success"  href="${cp}/">메인</a>       
         </div>
         
+   
     </form>
 </div>
+
 
 <script>
 //글쓰기
@@ -72,7 +96,8 @@ function fn_write(){
     form.submit();
     
 }
- 
+
+
 
 </script>
 

@@ -35,4 +35,12 @@ public class RMemberService implements MemberService {
 		List<Member> mem = dao.ClientInfo(member);
 		return mem;
 	}
+	
+	public void memberModify(Member member) {
+		dao.MemberModify(member);
+	}
+	
+	public void memberDelete(Member member){
+		dao.memberDelete(member);
+	}
 }

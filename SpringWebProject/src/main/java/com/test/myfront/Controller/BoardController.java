@@ -100,15 +100,22 @@ public class BoardController {
 		return "board/listCri";
 	}
 	
-	@RequestMapping("listPage")
-	public String listPage(Criteria cri, Model model) {
+	@RequestMapping("/listPage")
+	public ModelAndView listPage(@ModelAttribute("cri")Criteria cri, Model model) {
 		
-		model.addAttribute("list", service.listCriteria(cri));
+		ModelAndView mv = new ModelAndView();
+		
+	//	model.addAttribute("list", service.listCriteria(cri));
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(131);
-		model.addAttribute("pageMaker", pageMaker);
-		return "board/listPage";
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		
+		mv.addObject("pageMaker", pageMaker);
+		mv.addObject("list", service.listCriteria(cri));
+		System.out.println(service.listCriteria(cri));
+		mv.setViewName("board/board");
+		return mv;
 	}
 	
 }

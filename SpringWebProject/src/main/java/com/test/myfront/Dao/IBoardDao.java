@@ -20,4 +20,5 @@ public interface IBoardDao {
 	int BoardViewCnt(Board board);
 	List<Board> listPage(int page);
 	List<Board> listCriteria(Criteria cir);
+	int countPaging(Criteria cri);
 }

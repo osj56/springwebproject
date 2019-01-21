@@ -14,4 +14,12 @@
       
       SELECT * FROM member WHERE memId = #{memId}
       </select>
+      
+      <update id="MemberModify">
+      UPDATE member SET memPw = #{memPw}, memMail=#{memMail} WHERE memId=#{memId}
+      </update>
+      
+      <delete id="memberDelete">
+      DELETE member WHERE memId=#{memId} AND memPw=#{memPw}
+      </delete>
 </mapper>

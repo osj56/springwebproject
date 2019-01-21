@@ -202,13 +202,19 @@ public class BoardDao implements IBoardDao {
 	public List<Board> listPage(int page) {
 		if(page<0) page = 1;
 		page = (page - 1) * 10;
-		return null;
+		return sqlsession.selectList("board.listPage",page);
 	}
 	
 	@Override
-	public List<Board> listCriteria(Criteria cir) {
+	public List<Board> listCriteria(Criteria cri) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlsession.selectList("board.listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("board.countPaging", cri);
 	}
 
 	

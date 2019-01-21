@@ -36,31 +36,35 @@
 </head>
 
 <body>
-
-	<c:forEach items="${list}" var="row">
+<form:form action="${cp}/memDelete" method="post" commandName="member">
+	<c:forEach items="${delete}" var="row">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">회원정보</h3>
+                        <h3 class="panel-title">회원삭제</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" >
                             <fieldset>
                                 <div class="form-group">
-                                	
-                                   <td>ID <input class="form-control" placeholder="ID" name="memId" type="ID" value="${row.memId}"></td>
-                                </div>
-                        
-                                 <div class="form-group">
-                                   <td>Email</td> <input class="form-control" placeholder="Email" name="memMail" type="Email" value="${row.memMail}">
+                                	<input type="hidden" name="memId" value="${row.memId}">
+                                   <td>ID <input class="form-control" placeholder="ID" value="${row.memId}"></td>
                                 </div>
                                 
+                        		
+                                
+                                 <div class="form-group">
+                                   <td>Email</td> <input class="form-control" placeholder="Email" value="${row.memMail}">
+                                </div>
+                                	<div class="form-group">
+                                	
+                                   <td>Password <input class="form-control" placeholder="Password" name="memPw" type="password" ></td>
+                                </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 
-                                <a class="btn btn-lg btn-success btn-block"  href="${cp}/memModifyForm" >수정</a>
-                                <a class="btn btn-lg btn-success btn-block"  href="${cp}/memDeleteForm" >삭제</a>
+                                <button type="submit" class="btn btn-lg btn-success btn-block"  >확인</button>
          						<a class="btn btn-lg btn-success btn-block"  href="${cp}/">메인</a>
                             </fieldset>
                         </form>
@@ -70,7 +74,7 @@
         </div>
     </div>
 </c:forEach>
-
+</form:form>
     <!-- jQuery -->
     <script src="resources/vendor/login_jquery/jquery.min.js"></script>
 

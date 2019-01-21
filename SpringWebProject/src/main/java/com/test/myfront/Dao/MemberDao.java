@@ -113,5 +113,11 @@ public class MemberDao implements IMemberDao {
 		return members;
 	}
 
-
+	public void MemberModify(final Member member) {
+		sqlsession.update("member.MemberModify", member);
+	}
+	
+	public void memberDelete(final Member member) {
+		sqlsession.delete("member.memberDelete", member);
+	}
 }

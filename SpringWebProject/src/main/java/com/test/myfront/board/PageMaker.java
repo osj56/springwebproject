@@ -1,5 +1,8 @@
 package com.test.myfront.board;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 	private int totalCount;
 	private int startPage;
@@ -26,7 +29,7 @@ public class PageMaker {
 		startPage = (endPage - displayPageNum)+1;
 		int tempEndPage = (int)(Math.ceil(totalCount/(double)cri.getPerPageNum()));
 		
-		if(endPage > tempEndPage) endPage = tempEndPage;
+		if(endPage > tempEndPage) {endPage = tempEndPage;}
 		
 		prev = startPage == 1? false : true;
 		next = endPage * cri.getPerPageNum() >= totalCount ? false:true;
@@ -78,5 +81,16 @@ public class PageMaker {
 
 	public void setCri(Criteria cri) {
 		this.cri = cri;
+	}
+	
+	public String makeQuery(int page)
+	{
+	 UriComponents uriComponents =
+	   UriComponentsBuilder.newInstance()
+	   .queryParam("page", page)
+	   .queryParam("perPageNum", cri.getPerPageNum())
+	   .build();
+	   
+	 return uriComponents.toUriString();
 	}
 }

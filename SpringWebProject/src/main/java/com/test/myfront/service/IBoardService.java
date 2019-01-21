@@ -16,4 +16,6 @@ public interface IBoardService {
 	Board boardModify(Board board, int cnt);
 	void boardDelete(Board board, int cnt);
 	List<Board> listCriteria(Criteria cri);
+	int listCountCriteria(Criteria cri);
+	int countPaging(Criteria cri);
 }

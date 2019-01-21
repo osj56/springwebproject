@@ -1,4 +1,4 @@
-package com.test.myfront.Controller;
+  package com.test.myfront.Controller;
 
 import java.util.List;
 import java.util.Locale;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
+import com.test.myfront.board.PageMaker;
 import com.test.myfront.member.Member;
 import com.test.myfront.service.BoardService;
 import com.test.myfront.service.RMemberService;
@@ -87,21 +89,62 @@ public class HomeController {
 		mv.setViewName("/board/clientInfo");
 		return mv;
 	}
-	
-	@RequestMapping(value="/board")
-	public ModelAndView board(Board board, HttpServletRequest request) {
+	@RequestMapping("/memModifyForm")
+	public ModelAndView memModify(Member member, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memId =(String)session.getAttribute("login");
+		member.setMemId(memId);
+		List<Member> mem = service.clientInfo(member);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("modify",mem);
+		mv.setViewName("/board/memModify");
+		return mv;
+		
+	}
+	@RequestMapping(value="/memModify", method=RequestMethod.POST)
+	public String memModify(Member member) {
+		service.memberModify(member);
+		return "redirect:/";
+	}
+	@RequestMapping("/memDeleteForm")
+	public ModelAndView memDeleteForm(Member member, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String memId =(String)session.getAttribute("login");
+		member.setMemId(memId);
+		List<Member> mem = service.clientInfo(member);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("delete",mem);
+		mv.setViewName("/board/memDelete");
+		return mv;
+		
+	}
+	@RequestMapping(value="/memDelete")
+	public String memDelete(Member member, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		service.memberDelete(member);
+		return "/home";
+	}
+	@RequestMapping(value="/board")
+	public ModelAndView board(Board board, HttpServletRequest request, @ModelAttribute("cri")Criteria cri) {
+		ModelAndView mv = new ModelAndView();           
 		HttpSession session = request.getSession();
 		session.getAttribute("login");
-
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bservice.listCountCriteria(cri));   
+		
 		List<Board> list = bservice.boardList(board);
 		Member mem = new Member();
 		
 		//board.setCnt(cnt);
 		mv.addObject("list",list);
+		mv.addObject("pageMaker", pageMaker);
+		mv.addObject("plist", bservice.listCriteria(cri));
 		mv.setViewName("/board/board");
 	//	System.out.println(mem.getMemMail());
-		
+		System.out.println(bservice.listCriteria(cri));
 		return mv;
 	}
 }
