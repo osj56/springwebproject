@@ -62,6 +62,7 @@
                                 	
                                    <td>Password <input class="form-control" placeholder="Password" name="memPw" type="password" ></td>
                                 </div>
+                                
                                 <!-- Change this to a button or input when using this as a form -->
                                 
                                 <button type="submit" class="btn btn-lg btn-success btn-block"  >확인</button>
