@@ -1,20 +1,16 @@
 package com.test.myfront.Controller;
 
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,11 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.test.myfront.board.Criteria;
+import com.test.myfront.board.PageMaker;
+import com.test.myfront.chatVo.ChatRoom;
 import com.test.myfront.chatVo.Message;
+import com.test.myfront.service.BoardService;
+import com.test.myfront.service.ChatService;
 
 @Controller
-@Repository("/chat")
+@RequestMapping("/chat")
 public class ChatController {
+	
+	@Autowired
+	ChatService service;
+	
+	@Autowired
+	BoardService bservice;
 	
 	@Autowired
 	private SimpMessageSendingOperations messagingTemplate;
@@ -71,5 +78,28 @@ public class ChatController {
 	    return message;
 	}
 	
+	@RequestMapping("/chatRoom")
+	public ModelAndView getRoom(@ModelAttribute("cri")Criteria cri,ChatRoom room) {
+		List<ChatRoom> list = service.getRoom(room);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list",list);
+		mv.setViewName("/chat/chatRoom");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bservice.listCountCriteria(cri));
+		mv.addObject("pageMaker",pageMaker);
+		return mv;
+	}
+	
+	@RequestMapping("/create")
+	public String CreatRoom() {
+		return "/chat/createRoom";
+	}
+	@RequestMapping("/CreateRoom")
+	public String InsertChatRoom(ChatRoom room) {
+		service.insertChatRoom(room);
+		return "redirect:/chat/chatRoom";
+	}
 	
 }
