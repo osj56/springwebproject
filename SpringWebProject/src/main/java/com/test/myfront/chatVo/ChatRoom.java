@@ -3,6 +3,13 @@ package com.test.myfront.chatVo;
 public class ChatRoom {
 	private String chatuser;
 	private String roomname;
+	private String other;
+	public String getOther() {
+		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
+	}
 	public String getChatuser() {
 		return chatuser;
 	}

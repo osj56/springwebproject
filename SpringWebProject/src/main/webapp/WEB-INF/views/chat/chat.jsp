@@ -5,11 +5,12 @@
 <html>
     <head>
         <title>Chat WebSocket</title>
-        <link rel="stylesheet" type="text/css" href="resources/css/chat.css">
-        <script src="resources/js/chat.js"></script>
+        <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/resources/css/chat.css">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="<c:url value='/resources/js/chat.js'/>"></script> 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		
 		
      	<script src=" https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -140,7 +141,9 @@
     </div>
     <input type="hidden" id="from" value="${row}"/>
      <button class="btn btn-primary btn-sm" id="connect" onclick="connect();">Connect</button>
-       <button class="btn btn-primary btn-sm" id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+     <button class="btn btn-primary btn-sm" id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+
+     <a class="btn btn-primary btn-sm"  href="${cp}/">메인</a>   
     <div class="btn-group dropup">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-cog"></span>

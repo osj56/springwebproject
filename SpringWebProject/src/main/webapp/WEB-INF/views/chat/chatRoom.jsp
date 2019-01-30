@@ -19,6 +19,7 @@
 <body>
 <div class="container">
     <form id="chatForm" name="boardForm" method="post">
+     
      <table class="table table-striped">
   <thead>
     <tr>
@@ -32,6 +33,8 @@
  
    
       <c:forEach items="${list}" var="row" varStatus="status"  >
+     
+       <input type="hidden" name="roomname" value="${row.roomname}">
     <tr>
 
       <td scope="row">${row.chatuser}</td>
@@ -39,10 +42,8 @@
       
    	  
     
-      <td><a href="${cp}/chat/chat">${row.roomname}</a></td>
-   		
-
-      
+      <td><a href="${cp}/chat/chat?roomname=${row.roomname}" >${row.roomname}</a></td>
+   	
     </tr>
     </c:forEach>
     
@@ -50,7 +51,6 @@
   </tbody>
   
 </table>
-
 
 
 <nav aria-label="Page navigation example">

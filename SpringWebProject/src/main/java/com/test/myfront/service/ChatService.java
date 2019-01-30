@@ -20,4 +20,8 @@ public class ChatService {
 	public List<ChatRoom> getRoom(ChatRoom room){
 		return dao.getRoom(room);
 	}
+	
+	public List<String> getUser(String roomname) {
+		return dao.getUser(roomname);
+	}
 }

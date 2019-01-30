@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
-	<insert id="chatRoom">
+	  
+	  <insert id="chatRoom">
       	INSERT INTO CHAT (chatuser,roomname) values (#{chatuser},#{roomname})
       </insert>
       
       <select id="getList" resultType="com.test.myfront.chatVo.ChatRoom">
       SELECT * FROM CHAT
-      
       </select>
-
+	  
+	  <select id="getUser" resultType="java.lang.String">
+	  SELECT chatuser FROM CHAT WHERE roomname=#{roomname}
+	  </select>
 </mapper>

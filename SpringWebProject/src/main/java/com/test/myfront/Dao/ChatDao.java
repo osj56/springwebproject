@@ -20,4 +20,11 @@ public class ChatDao {
 	public List<ChatRoom> getRoom(final ChatRoom room){
 		return sqlsession.selectList("chat.getList");
 	}
+	
+	public List<String> getUser(String roomname) {
+		return sqlsession.selectList("chat.getUser", roomname);
+	
+	}
+	
+	
 }
