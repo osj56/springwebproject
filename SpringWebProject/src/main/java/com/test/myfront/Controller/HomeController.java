@@ -22,14 +22,14 @@ import com.test.myfront.board.Criteria;
 import com.test.myfront.board.PageMaker;
 import com.test.myfront.member.Member;
 import com.test.myfront.service.BoardService;
-import com.test.myfront.service.RMemberService;
+import com.test.myfront.service.MemberService;
 
 @Controller
 public class HomeController {
 	
 	
 	@Autowired
-	RMemberService service;
+	MemberService service;
 	@Autowired
 	BoardService bservice;
 	

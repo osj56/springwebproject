@@ -1,4 +1,4 @@
-package com.test.myfront.chatVo;
+package com.test.myfront.chat;
 
 public class Message {
 	private String from;

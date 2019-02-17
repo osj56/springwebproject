@@ -6,7 +6,7 @@
       	INSERT INTO CHAT (chatuser,roomname,chatcnt) values (#{chatuser},#{roomname}, chatcnt.NEXTVAl)
       </insert>
       
-      <select id="getList" resultType="com.test.myfront.chatVo.ChatRoom">
+      <select id="getList" resultType="com.test.myfront.chat.ChatRoom">
       SELECT * FROM CHAT
       </select>
 	  
@@ -14,7 +14,7 @@
 	  SELECT chatuser FROM CHAT WHERE roomname=#{roomname}
 	  </select>
   
-	   <select id="listCriteria" resultType="com.test.myfront.chatVo.ChatRoom">
+	   <select id="listCriteria" resultType="com.test.myfront.chat.ChatRoom">
        select  chatuser,roomname,chatcnt
        from (
            select chatuser,roomname,chatcnt,

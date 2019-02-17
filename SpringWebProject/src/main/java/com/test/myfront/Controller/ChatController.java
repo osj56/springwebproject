@@ -25,8 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.test.myfront.board.Criteria;
 import com.test.myfront.board.PageMaker;
-import com.test.myfront.chatVo.ChatRoom;
-import com.test.myfront.chatVo.Message;
+import com.test.myfront.chat.ChatRoom;
+import com.test.myfront.chat.Message;
 import com.test.myfront.service.BoardService;
 import com.test.myfront.service.ChatService;
 

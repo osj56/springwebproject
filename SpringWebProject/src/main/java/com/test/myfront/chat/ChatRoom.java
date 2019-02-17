@@ -1,4 +1,4 @@
-package com.test.myfront.chatVo;
+package com.test.myfront.chat;
 
 public class ChatRoom {
 	private String chatuser;

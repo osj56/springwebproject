@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.test.myfront.board.Board;
 import com.test.myfront.board.Criteria;
-import com.test.myfront.chatVo.ChatRoom;
+import com.test.myfront.chat.ChatRoom;
 
 @Repository
 public class ChatDao {

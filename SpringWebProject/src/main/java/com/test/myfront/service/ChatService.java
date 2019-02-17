@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.test.myfront.Dao.ChatDao;
 import com.test.myfront.board.Board;
 import com.test.myfront.board.Criteria;
-import com.test.myfront.chatVo.ChatRoom;
+import com.test.myfront.chat.ChatRoom;
 
 @Service
 public class ChatService {
