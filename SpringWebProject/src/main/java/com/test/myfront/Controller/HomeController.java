@@ -1,9 +1,12 @@
   package com.test.myfront.Controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +60,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/join", method= RequestMethod.POST)
-	public String memjoin(Member member) {
+	public String memjoin(Member member){
+		
 		service.memberRegister(member);
-		return "/board/joinOk";
+		return "/home";
+		
 	}
 	
 	@RequestMapping(value="/loginForm", method=RequestMethod.POST)

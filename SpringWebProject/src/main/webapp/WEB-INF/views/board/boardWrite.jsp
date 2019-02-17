@@ -18,7 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
- <form:form action="${cp}/board/boardcomplete" method="post" >
+ <form:form action="${cp}/board/boardcomplete" method="post" enctype="multipart/form-data" >
 <div class="container">
 <table class="table table-bordered">
     <thead>
@@ -33,11 +33,15 @@
             <tr>
                 <th>내용: </th>
                 <td><textarea cols="30" placeholder="내용을 입력하세요. " name="content"></textarea></td>
+           		
             </tr>
-            
+            <tr>
+                <th>이미지: </th>
+             	<td> <input type="file" name="file" accept="image/jpeg,image/png,image/gif"></td>
+            </tr>  
             <tr>
                 <td colspan="2">
-                    <button type="submit"  class="btn btn-lg btn-success btn-block">등록</button>
+                    <button type="submit"  class="btn btn-primary">등록</button>
    
                     
                 </td>
@@ -47,6 +51,7 @@
 </table>
 </div>
 </form:form>
+
 </body>
 </html>
 

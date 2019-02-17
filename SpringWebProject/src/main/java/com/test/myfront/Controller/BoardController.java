@@ -11,19 +11,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.test.myfront.board.Board;
 import com.test.myfront.board.Criteria;
 import com.test.myfront.board.PageMaker;
+import com.test.myfront.comment.Comment;
+import com.test.myfront.fileUpload.FileUpload;
 import com.test.myfront.member.Member;
 import com.test.myfront.service.BoardService;
+import com.test.myfront.service.CommentService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	@Autowired
 	BoardService service;
+	
+	@Autowired
+	FileUpload fileUpload;
+	
+	@Autowired
+	CommentService cservice;
 	
 	@ModelAttribute("cp")
 	public String getContextPath(HttpServletRequest request) {
@@ -36,24 +48,26 @@ public class BoardController {
 		return "/board/boardWrite";
 	}
 	@RequestMapping(value="boardcomplete", method=RequestMethod.POST)
-	public String boardOk(Board board, HttpServletRequest request) {
+	public String boardOk(Board board, HttpServletRequest request, @RequestParam("file") MultipartFile uploadFile, MultipartHttpServletRequest mRequest) {
 		HttpSession session =request.getSession();
 		String name=(String) session.getAttribute("login");
 		board.setWriter(name);
-		
+		String path= fileUpload.fileUpload(mRequest, uploadFile);
 		service.boardWrite(board);
-		
+		System.out.println(path);
 	
 		return "redirect:/board";
 	}
 	
 	@RequestMapping(value="boardDetail")
-	public ModelAndView boardDetail(Board board, HttpServletRequest request) {
+	public ModelAndView boardDetail(Comment comment,Board board, HttpServletRequest request) {
 		
 		
 		List<Board> detail = service.detailBoardList(board,board.getCnt());
+		List<Comment> cdetail = cservice.getList(comment,board.getCnt());
 		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("comment", cdetail);
 		mv.addObject("detail",detail);
 		mv.setViewName("/board/boardDetail");
 		System.out.println("상세보기 조회수");

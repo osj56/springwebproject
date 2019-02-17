@@ -24,7 +24,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">제목</th>
-      <th scope="col">내용</th>
+     
       <th scope="col">작성자</th>
       <th scope="col">조회수</th>
     </tr>
@@ -43,7 +43,7 @@
       <td><a href="${cp}/board/boardDetail?cnt=${row.cnt}">${row.title}</a></td>
    		
 
-      <td>${row.content}</td>
+      
       <td>${row.writer}</td>
       <td>${row.viewCnt}</td>
     </tr>

@@ -3,7 +3,7 @@
 <mapper namespace="chat">
 	  
 	  <insert id="chatRoom">
-      	INSERT INTO CHAT (chatuser,roomname) values (#{chatuser},#{roomname})
+      	INSERT INTO CHAT (chatuser,roomname,chatcnt) values (#{chatuser},#{roomname}, chatcnt.NEXTVAl)
       </insert>
       
       <select id="getList" resultType="com.test.myfront.chatVo.ChatRoom">
@@ -13,4 +13,21 @@
 	  <select id="getUser" resultType="java.lang.String">
 	  SELECT chatuser FROM CHAT WHERE roomname=#{roomname}
 	  </select>
+  
+	   <select id="listCriteria" resultType="com.test.myfront.chatVo.ChatRoom">
+       select  chatuser,roomname,chatcnt
+       from (
+           select chatuser,roomname,chatcnt,
+               row_number() over(order by chatcnt desc) as rNum
+           from chat
+     ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by chatcnt desc
+	 
+	 
+      </select>
+      
+      <select id="countPaging" resultType="int">
+      	SELECT count(chatcnt) from CHAT where chatcnt>0
+      </select>
 </mapper>

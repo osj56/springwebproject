@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.test.myfront.board.Board;
+import com.test.myfront.board.Criteria;
 import com.test.myfront.chatVo.ChatRoom;
 
 @Repository
@@ -26,5 +28,13 @@ public class ChatDao {
 	
 	}
 	
-	
+	public List<ChatRoom> listCriteria(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("chat.listCriteria", cri);
+	}
+	public int countPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("chat.countPaging", cri);
+	}
+
 }

@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container">
-    <form id="chatForm" name="boardForm" method="post">
+    <form id="chatForm" name="chatForm" method="post">
      
      <table class="table table-striped">
   <thead>
@@ -32,7 +32,7 @@
   <tbody>
  
    
-      <c:forEach items="${list}" var="row" varStatus="status"  >
+      <c:forEach items="${plist}" var="row" varStatus="status"  >
      
        <input type="hidden" name="roomname" value="${row.roomname}">
     <tr>
@@ -58,17 +58,17 @@
    
    <c:if test="${pageMaker.prev}">
     <li class="page-item disabled">
-      <a class="page-link" href="board${pageMaker.makeQuery(pageMaker.startPage - 1)}" tabindex="-1" aria-disabled="true">Previous</a>
+      <a class="page-link" href="chatRoom${pageMaker.makeQuery(pageMaker.startPage - 1)}" tabindex="-1" aria-disabled="true">Previous</a>
     </li>
    </c:if> 
     
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-    <li class="page-item"><a class="page-link" href="board${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    <li class="page-item"><a class="page-link" href="chatRoom${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:forEach>
     
       <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
     <li class="page-item">
-      <a class="page-link" href="board${pageMaker.makeQuery(pageMaker.endPage + 1)}">Next</a>
+      <a class="page-link" href="chatRoom${pageMaker.makeQuery(pageMaker.endPage + 1)}">Next</a>
     </li>
      </c:if> 
   </ul>

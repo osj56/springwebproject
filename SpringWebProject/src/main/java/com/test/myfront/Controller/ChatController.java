@@ -16,6 +16,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,7 +96,7 @@ public class ChatController {
 	}
 	
 	@RequestMapping("/chatRoom")
-	public ModelAndView getRoom(@ModelAttribute("cri")Criteria cri,ChatRoom room) {
+	public ModelAndView getRoom(@ModelAttribute("cri")Criteria cri,ChatRoom room, HttpServletRequest request) {
 		List<ChatRoom> list = service.getRoom(room);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list",list);
@@ -103,8 +104,9 @@ public class ChatController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bservice.listCountCriteria(cri));
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
 		mv.addObject("pageMaker",pageMaker);
+		mv.addObject("plist", service.listCriteria(cri));
 		return mv;
 	}
 	
@@ -126,6 +128,24 @@ public class ChatController {
 		service.insertChatRoom(room);
 
 		return "redirect:/chat/chatRoom";
+	}
+	
+	@RequestMapping("/listPage")
+	public ModelAndView listPage(@ModelAttribute("cri")Criteria cri, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+	//	model.addAttribute("list", service.listCriteria(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		
+		mv.addObject("pageMaker", pageMaker);
+	//	mv.addObject("list", service.listCriteria(cri));
+		System.out.println(service.listCriteria(cri));
+		mv.setViewName("/chat/createRoom");
+		return mv;
 	}
 	
 }

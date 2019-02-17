@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+	<insert id="CommentWrite">
+		INSERT INTO comments (name,content,commentcnt) VALUES (#{name},#{content},#{commentcnt})
+	</insert>
+	
+	<select id="getList" resultType="com.test.myfront.comment.Comment">
+		SELECT name,content,commentcnt FROM comments where commentcnt = #{commentcnt}
+	</select>
+	
+	<update id="Commentmodify" parameterType="com.test.myfront.comment.Comment">
+		UPDATE comments SET content=#{content} where commentcnt=#{commentcnt} AND name=#{name}
+	</update>
+	
+	<delete id="CommentDelete">
+		DELETE comments where commentcnt=#{commentcnt} AND name=#{name}
+	</delete>
+</mapper>
