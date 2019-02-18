@@ -27,7 +27,7 @@
       	DELETE board WHERE cnt = #{cnt}
       </delete>
       
-      <update id="BoardViewCnt">
+      <update id="BoardViewCnt" >
       	UPDATE board SET viewcnt = viewcnt + 1 where cnt = #{cnt}
       </update>
       <select id="listPage" resultType="com.test.myfront.board.Board">

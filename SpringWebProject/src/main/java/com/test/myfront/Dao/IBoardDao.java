@@ -17,7 +17,7 @@ public interface IBoardDao {
 	int BoardModify(Board board, int cnt);
 	List<Board> ShowDefaultModifyList(Board board, int cnt);
 	int BoardDelete(Board board, int cnt);
-	int BoardViewCnt(Board board);
+	int BoardViewCnt(int cnt);
 	List<Board> listPage(int page);
 	List<Board> listCriteria(Criteria cir);
 	int countPaging(Criteria cri);

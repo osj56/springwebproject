@@ -32,6 +32,14 @@
 
 	<context:component-scan base-package="com.test.myfront" />
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/memModify"/>
+			<mapping path="/memDelete"/>
+			
+			<beans:bean class="com.test.myfront.member.MemberLoginInterceptor"/>
+		</interceptor>
 	
+	</interceptors>
 	
 </beans:beans>

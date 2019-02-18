@@ -183,7 +183,7 @@ public class BoardDao implements IBoardDao {
 	}
 
 	@Override
-	public int BoardViewCnt(final Board board) {
+	public int BoardViewCnt(int cnt) {
 	/*	int result=0;
 		final String sql ="UPDATE board SET viewcnt = viewcnt + 1 where cnt = ?";
 		result = template.update(sql, new PreparedStatementSetter() {
@@ -195,7 +195,7 @@ public class BoardDao implements IBoardDao {
 			}
 		});
 		*/
-		return sqlsession.update("board.BoardViewCnt", board);
+		return sqlsession.update("board.BoardViewCnt", cnt);
 	}
 	
 	@Override

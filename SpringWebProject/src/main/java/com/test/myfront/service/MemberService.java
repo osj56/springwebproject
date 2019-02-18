@@ -30,16 +30,16 @@ public class MemberService implements IMemberService {
 		return result;
 		
 	}
-	
+	@Override
 	public List<Member> clientInfo(Member member){
 		List<Member> mem = dao.ClientInfo(member);
 		return mem;
 	}
-	
+	@Override
 	public void memberModify(Member member) {
 		dao.MemberModify(member);
 	}
-	
+	@Override
 	public void memberDelete(Member member){
 		dao.memberDelete(member);
 	}
