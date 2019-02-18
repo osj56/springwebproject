@@ -1,15 +1,14 @@
   package com.test.myfront.Controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +31,11 @@ public class HomeController {
 	MemberService service;
 	@Autowired
 	BoardService bservice;
-	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+
+
+
 	@ModelAttribute("cp")
 	public String getContextPath(HttpServletRequest request) {
 		return request.getContextPath();
@@ -61,7 +64,8 @@ public class HomeController {
 	
 	@RequestMapping(value="/join", method= RequestMethod.POST)
 	public String memjoin(Member member){
-		
+		String enc = passwordEncoder.encode(member.getMemPw());
+		member.setMemPw(enc);
 		service.memberRegister(member);
 		return "/home";
 		
@@ -70,10 +74,14 @@ public class HomeController {
 	@RequestMapping(value="/loginForm", method=RequestMethod.POST)
 	public String getLoginCheck(Member member, HttpSession session) {
 		Member mem=service.memberSearch(member);
-		if(mem==null) return "/board/login";
-		System.out.println(mem.getMemId());
+		
+		
+		if(this.passwordEncoder.matches(member.getMemPw(), mem.getMemPw())==true) {
+		
 		session.setAttribute("login", mem.getMemId());
 		return "redirect:/";
+		}
+		else return "/board/login";
 	}
 	
 	@RequestMapping(value="/logOut")
@@ -108,6 +116,8 @@ public class HomeController {
 	}
 	@RequestMapping(value="/memModify", method=RequestMethod.POST)
 	public String memModify(Member member) {
+		String enc = passwordEncoder.encode(member.getMemPw());
+		member.setMemPw(enc);
 		service.memberModify(member);
 		return "redirect:/";
 	}
@@ -125,10 +135,14 @@ public class HomeController {
 	}
 	@RequestMapping(value="/memDelete")
 	public String memDelete(Member member, HttpServletRequest request) {
+		Member mem=service.memberSearch(member);
+		if(this.passwordEncoder.matches(member.getMemPw(), mem.getMemPw())==true) {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		service.memberDelete(member);
 		return "/home";
+		}else return "redirect:/";
+		
 	}
 	@RequestMapping(value="/board")
 	public ModelAndView board(Board board, HttpServletRequest request, @ModelAttribute("cri")Criteria cri) {
