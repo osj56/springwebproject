@@ -24,8 +24,7 @@ public class CommentService {
 	}
 	
 	public void CommentModify(Comment comment) {
-		System.out.println("¼­ºñ½º");
-		//System.out.println(map.get(cnt));
+		
 		dao.CommentModify(comment);
 	}
 	

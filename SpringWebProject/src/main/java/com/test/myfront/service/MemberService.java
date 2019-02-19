@@ -20,13 +20,9 @@ public class MemberService implements IMemberService {
 	}
 	@Override
 	public Member memberSearch(Member member) {
-		// TODO Auto-generated method stub
+		
 		Member result = dao.memberSearch(member);
-		if (result == null) {
-			System.out.println("Login Fail!!");
-		} else {
-			System.out.println("Login Success!!");
-		}
+		
 		return result;
 		
 	}

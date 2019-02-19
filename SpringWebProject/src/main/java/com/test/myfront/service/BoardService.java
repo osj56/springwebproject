@@ -18,8 +18,7 @@ public class BoardService implements IBoardService {
 	
 	@Override
 	public void boardWrite(Board board) {
-	//	HttpSession session = request.getSession();
-		
+	
 		  dao.BoardWrite(board);
 		
 	}
@@ -32,14 +31,14 @@ public class BoardService implements IBoardService {
 	@Transactional
 	@Override
 	public List<Board> detailBoardList(Board board,int cnt){
-		//System.out.println(cnt);
+		
 		dao.BoardViewCnt(cnt);
 		
 		return dao.getDetailList(board,cnt);
 	}
 	@Override
 	public List<Board> showDefaultModify(Board board,int cnt){
-		//System.out.println(cnt);
+		
 		return dao.getDetailList(board,cnt);
 	}
 
@@ -47,8 +46,7 @@ public class BoardService implements IBoardService {
 	public Board boardModify(Board board, int cnt) {
 		// TODO Auto-generated method stub
 		dao.BoardModify(board, cnt);
-		System.out.println("¼·½Ã½º");
-		System.out.println(cnt);
+		
 		return board;
 	}
 

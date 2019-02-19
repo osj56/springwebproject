@@ -43,8 +43,7 @@ public class BoardController {
 	}
 	@RequestMapping(value="boardWrite")
 	public String boardWrite(Board board, HttpSession session) {
-		Member mem = new Member();
-		System.out.println(mem.getMemId());
+		
 		return "/board/boardWrite";
 	}
 	@RequestMapping(value="boardcomplete", method=RequestMethod.POST)
@@ -54,7 +53,6 @@ public class BoardController {
 		board.setWriter(name);
 		String path= fileUpload.fileUpload(mRequest, uploadFile);
 		service.boardWrite(board);
-		System.out.println(path);
 	
 		return "redirect:/board";
 	}
@@ -70,8 +68,6 @@ public class BoardController {
 		mv.addObject("comment", cdetail);
 		mv.addObject("detail",detail);
 		mv.setViewName("/board/boardDetail");
-		System.out.println("상세보기 조회수");
-		System.out.println(detail);
 		return mv;
 	}
 	
@@ -82,8 +78,6 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("modify",detail);
 		mv.setViewName("/board/boardModifyForm");
-		System.out.println("d");
-		System.out.println(board.getCnt());
 		return mv;
 	}
 	
@@ -95,10 +89,6 @@ public class BoardController {
 		mv.addObject("modify", board);
 		mv.setViewName( "redirect:/board");
 		
-		System.out.println("아래는 수정값");
-		System.out.println(board.getTitle());
-		System.out.println(board.getContent());
-		System.out.println(board.getCnt());
 		return mv;
 	}
 	
@@ -119,15 +109,12 @@ public class BoardController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-	//	model.addAttribute("list", service.listCriteria(cri));
-		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
 		
 		mv.addObject("pageMaker", pageMaker);
 		mv.addObject("list", service.listCriteria(cri));
-		System.out.println(service.listCriteria(cri));
 		mv.setViewName("board/board");
 		return mv;
 	}

@@ -23,13 +23,7 @@ public class ChatRoom {
 	public void setRoomname(String roomname) {
 		this.roomname = roomname;
 	}
-/*	public int getChatCnt() {
-		return chatcnt;
-	}
-	public void setChatCnt(int chatcnt) {
-		this.chatcnt = chatcnt;
-	}
-	*/
+
 	public int getChatcnt() {
 		return chatcnt;
 	}

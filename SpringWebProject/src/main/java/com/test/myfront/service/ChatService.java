@@ -28,12 +28,12 @@ public class ChatService {
 	}
 	
 	public List<ChatRoom> listCriteria(Criteria cri) {
-		// TODO Auto-generated method stub
+		
 		return dao.listCriteria(cri);
 	}
 	
 	public int listCountCriteria(Criteria cri) {
-		// TODO Auto-generated method stub
+		
 		return dao.countPaging(cri);
 	}
 

@@ -70,24 +70,11 @@ public class ChatController {
 			out.println("<script>alert('입장할 수 없는 유저입니다'); history.go(-1);</script>");
 			out.flush();
 			mv.addObject("deny",user);
-		//	mv.setViewName("redirect:/chat/chatRoom");
+		
 			return mv;
 		}
 	}
-	
-/*	@MessageMapping("/message")
-	@SendToUser("/queue/reply")
-	public String processMessageFromClient(@Payload String message,Principal principal, HttpServletRequest request) throws Exception{
-		HttpSession session = request.getSession();
-		return gson.fromJson(message, Map.class).get("name").toString();
-	}
-	
-	@MessageExceptionHandler
-	@SendToUser("/queue/errors")
-	public String handleException(Throwable exception) {
-		return exception.getMessage();
-	}
-*/
+
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
 	public Message send(Message message) throws Exception {
@@ -115,7 +102,6 @@ public class ChatController {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("login");
 		
-		System.out.println("사용자들"+other);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user", user);
 		mv.addObject("other",other);
@@ -135,15 +121,11 @@ public class ChatController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-	//	model.addAttribute("list", service.listCriteria(cri));
-		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
 		
 		mv.addObject("pageMaker", pageMaker);
-	//	mv.addObject("list", service.listCriteria(cri));
-		System.out.println(service.listCriteria(cri));
 		mv.setViewName("/chat/createRoom");
 		return mv;
 	}

@@ -157,13 +157,12 @@ public class HomeController {
 		List<Board> list = bservice.boardList(board);
 		Member mem = new Member();
 		
-		//board.setCnt(cnt);
+		
 		mv.addObject("list",list);
 		mv.addObject("pageMaker", pageMaker);
 		mv.addObject("plist", bservice.listCriteria(cri));
 		mv.setViewName("/board/board");
-	//	System.out.println(mem.getMemMail());
-		System.out.println(bservice.listCriteria(cri));
+	
 		return mv;
 	}
 }

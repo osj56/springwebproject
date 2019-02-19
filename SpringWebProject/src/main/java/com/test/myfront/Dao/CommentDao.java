@@ -27,12 +27,7 @@ public class CommentDao {
 	}
 	
 	public void CommentModify(final Comment comment) {
-		
-		//HttpSession session = request.getSession();
-		//String name =(String)session.getAttribute("login");
-		Map<Integer, String> parameters = new HashMap<Integer, String>();
-	///	parameters.put(cnt,cnt);
-	//	parameters.put("name", name);
+	
 		sqlsession.update("comment.Commentmodify",comment);
 	}
 	

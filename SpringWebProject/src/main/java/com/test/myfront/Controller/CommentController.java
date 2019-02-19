@@ -30,7 +30,7 @@ public class CommentController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insertOk(Comment comment,Board board,HttpSession session, HttpServletRequest request) {
-		//System.out.println(comment.getContent());
+		
 		session = request.getSession();
 		String name = (String)session.getAttribute("login");
 		comment.setName(name);
@@ -44,14 +44,7 @@ public class CommentController {
 	public String Modify(Comment comment,HttpSession session, HttpServletRequest request) {
 		session = request.getSession();
 		String name=(String)session.getAttribute("login");
-		
-		//comment.setCommentcnt(board.getCnt());
 		comment.setName(name);
-		//comment.setContent(content);
-		System.out.println(comment.getCommentcnt());
-		System.out.println(comment.getContent());
-		//Map<Integer,String> map = new HashMap<Integer,String>();
-		//map.put(board.getCnt(), name);
 		service.CommentModify(comment);
 		return "redirect:/board";
 	}
@@ -61,7 +54,7 @@ public class CommentController {
 		HttpSession session = request.getSession();
 		String name=(String)session.getAttribute("login");
 		comment.setName(name);
-		System.out.println(comment.getCommentcnt());
+		
 		service.CommentDelete(comment);
 		return "redirect:/board";
 	}

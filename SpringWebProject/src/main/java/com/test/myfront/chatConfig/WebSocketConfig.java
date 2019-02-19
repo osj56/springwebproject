@@ -19,21 +19,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 	  public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/chat");
 		registry.addEndpoint("/chat").withSockJS();
-      /*  registry.addEndpoint("/greeting").setHandshakeHandler(new DefaultHandshakeHandler() {
-
-            //Get sessionId from request and set it in Map attributes
-            public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
-                                             Map attributes) throws Exception {
-                if (request instanceof ServletServerHttpRequest) {
-                    ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-                    HttpSession session = servletRequest.getServletRequest().getSession();
-                    attributes.put("login", session.getId());
-                    System.out.println("¼¼¼Ç");
-                    System.out.println(session.getId());
-                }
-                return true;
-            }}).withSockJS();
-            */
+   
 	}
 
 }
