@@ -50,7 +50,8 @@ public class ChatController {
 	}
 	
 	@RequestMapping("/chat")
-	public ModelAndView chatForm(HttpServletRequest request,HttpServletResponse response ,Message message, String roomname) throws IOException {
+	public ModelAndView chatForm(HttpServletRequest request,HttpServletResponse response 
+			,Message message, String roomname) throws IOException {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("login");
@@ -58,8 +59,6 @@ public class ChatController {
 	
 		List<String> name = service.getUser(roomname);
 
-	
-		System.out.println(name.get(0).contains(user));
 		if(name.get(0).contains(user)==true) {
 		mv.addObject("chat",message.getFrom());
 		mv.setViewName("/chat/chat");
